@@ -1,26 +1,21 @@
 package com.myaudiolibrary.apirest.model;
-
-
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
 @Table (name="artist")
 
-
 public class Artist {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
 
-    @OneToMany (mappedBy = "Album")
-    @JsonIgnoreProperties("Album")
-    private List<Album>albums;
+    @OneToMany (mappedBy = "artist")
+    @JsonManagedReference // eviter pb de recurcivité
+    private List<Album> albums;
 
     @Column(name="ArtitsId")
     private Long id;

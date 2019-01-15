@@ -1,5 +1,7 @@
 package com.myaudiolibrary.apirest.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -9,15 +11,18 @@ import java.util.Objects;
 
 public class Album {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column (name="AlbumId")
+    private Long id;
+    @Column (name="Title")
+    private String Title;
+
     @ManyToOne
-    @JoinColumn (name="ArtistId")
+    @JoinColumn(name = "ArtistId")
+    @JsonBackReference
     private Artist artist;
 
-    @Column(name="AlbumId")
-    private Long id;
-
-    @Column(name="Title")
-    private String Title;
 
 
     //Constructeur
