@@ -1,6 +1,7 @@
 package com.myaudiolibrary.apirest.controller;
 
 
+import com.myaudiolibrary.apirest.exception.DoublonException;
 import com.myaudiolibrary.apirest.model.Album;
 import com.myaudiolibrary.apirest.service.AlbumService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,11 +17,13 @@ public class AlbumController
     private AlbumService albumService;
 
     // Exercice 7
-    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    public Album modification (@PathVariable(value ="id") Long id, @RequestBody Album album) {
-        return albumService.modification(id, album);
+    @RequestMapping(value = "",method = RequestMethod.POST,consumes="application/json",produces = "application/json")
+    public Album addAlbum(@RequestBody Album album) throws DoublonException {
+        return albumService.addAlbum(album);
 
     }
+
+
 
     //Exercice 8
     @RequestMapping(value = "/{id}", method =RequestMethod.DELETE)

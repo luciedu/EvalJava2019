@@ -5,21 +5,21 @@ import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
 
-@Entity
-@Table (name="artist")
+@Entity //pour mapper sur une BDD
+@Table (name="artist") //recupère le nom dans la BDD
 
 public class Artist
 
 {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="ArtistId")
+    @Column(name="ArtistId") //récupérer les noms des colonnes de la BDD
     private Long id;
-    @Column(name="Name")
+    @Column(name="Name") //récupérer les noms des colonnes de la BDD
     private String name;
 
     @OneToMany (mappedBy = "artist")
-    @JsonManagedReference // eviter pb de recurcivité
+    @JsonManagedReference // éviter le problème de recurcivité
     private List<Album> albums;
 
 
@@ -27,7 +27,6 @@ public class Artist
     public Long getId() {
         return id;
     }
-
     public void setId(Long id) {
         this.id = id;
     }
@@ -35,7 +34,6 @@ public class Artist
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }
@@ -43,13 +41,11 @@ public class Artist
     public List<Album> getAlbums() {
         return albums;
     }
-
     public void setAlbums(List<Album> albums) {
         this.albums = albums;
     }
 
 //Constructeur
-
     public Artist() {
     }
 

@@ -1,6 +1,5 @@
 package com.myaudiolibrary.apirest.controller;
-
-import com.myaudiolibrary.apirest.exception.ArtistNameException;
+import com.myaudiolibrary.apirest.exception.DoublonException;
 import com.myaudiolibrary.apirest.model.Artist;
 import com.myaudiolibrary.apirest.service.ArtistService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.List;
 
 @RestController
 @RequestMapping("/artists")
@@ -16,7 +16,7 @@ public class ArtistController
 {
 
     @Autowired
-    ArtistService artistService;
+    private ArtistService artistService;
 
     //Exercice 1
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces ="application/json")
@@ -27,23 +27,25 @@ public class ArtistController
 
     //Exercice 2
     @RequestMapping (params = "name") //si dans la requete on a un parametre matricule on ira directement ici
-    public Artist findByMatricule (@RequestParam("name") String name) throws EntityNotFoundException
+    public List<Artist> artists (@RequestParam(value = "name") String name) throws EntityNotFoundException
     {
         return artistService.findByName(name);
     }
 
+
     //Exercice 3
-    @RequestMapping(value = "")
-    public Page<Artist> findAllArtistPaging (@RequestParam("page") Integer page, @RequestParam ("size") Integer size,
-                                             @RequestParam("sortDirection") String sortDirection, @RequestParam("sortProperty")
-                                                       String sortProperty) throws IllegalArgumentException
+    @RequestMapping()
+    public Page<Artist> findAllArtistPaging (@RequestParam("page") Integer page,
+                                             @RequestParam ("size") Integer size,
+                                             @RequestParam("sortDirection") String sortDirection,
+                                             @RequestParam("sortProperty") String sortProperty) throws IllegalArgumentException
     {
         return artistService.findAllArtistPaging(page, size, sortDirection, sortProperty);
     }
 
     //Exercice 4
     @RequestMapping(value = "", method =RequestMethod.POST, produces ="application/json", consumes = "application/json")
-    public Artist nouvelArtist(@RequestBody Artist artist)throws ArtistNameException {
+    public Artist nouvelArtist(@RequestBody Artist artist)throws DoublonException {
         return artistService.nouvelArtist(artist);
     }
 

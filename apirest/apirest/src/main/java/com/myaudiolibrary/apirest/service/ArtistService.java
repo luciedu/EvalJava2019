@@ -1,6 +1,6 @@
 package com.myaudiolibrary.apirest.service;
 
-import com.myaudiolibrary.apirest.exception.ArtistNameException;
+import com.myaudiolibrary.apirest.exception.DoublonException;
 import com.myaudiolibrary.apirest.model.Artist;
 import com.myaudiolibrary.apirest.repository.ArtistRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,12 +9,13 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import javax.persistence.EntityNotFoundException;
+import java.util.List;
 
 @Service
 public class ArtistService {
 
     @Autowired
-    ArtistRepository artistRepository;
+    private ArtistRepository artistRepository;
 
     //Exercice 1
     public Artist findById(Long id)throws EntityNotFoundException {
@@ -26,13 +27,11 @@ public class ArtistService {
     }
 
     //exercice 2
-    public Artist findByName(String name) throws EntityNotFoundException {
-        Artist artist = artistRepository.findByName(name);
-        if (artist == null){
-            throw new EntityNotFoundException("L'artiste de nom : "+ name +" n'a pas été trouvé.");
-        }
-        return artist;
+    public List<Artist> findByName(String name) throws EntityNotFoundException{
+        return artistRepository.findByNameContaining(name);
     }
+
+
 
 
     //Exercice 3
@@ -60,11 +59,11 @@ public class ArtistService {
     }
 
     //Exercice 4
-    public Artist nouvelArtist (Artist artist) throws ArtistNameException {
+    public Artist nouvelArtist (Artist artist) throws DoublonException {
         //vérifier si le matricule existe en base
         if (artistRepository.findByName(artist.getName()) != null)
         {
-            throw new ArtistNameException("Le nom " + artist.getName() + " existe déjà !");
+            throw new DoublonException("Le nom " + artist.getName() + " existe déjà !");
         }
         return artistRepository.save(artist);
     }

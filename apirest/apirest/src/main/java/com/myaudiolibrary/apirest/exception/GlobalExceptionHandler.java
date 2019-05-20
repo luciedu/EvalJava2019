@@ -30,10 +30,10 @@ public class GlobalExceptionHandler
     }
 
     //Excercice 4
-    @ExceptionHandler(ArtistNameException.class)
+    @ExceptionHandler(DoublonException.class)
     @ResponseBody
     @ResponseStatus(HttpStatus.CONFLICT)
-    public String handleEntityNotFoundException(ArtistNameException artistName) {
+    public String handleEntityNotFoundException(DoublonException artistName) {
         //return "Erreur le nom existe déjà.";
         return artistName.getMessage();
     }

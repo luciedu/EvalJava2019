@@ -1,4 +1,4 @@
-package com.myaudiolibrary.apirest.Security;
+package com.myaudiolibrary.apirest.security;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.Ordered;
