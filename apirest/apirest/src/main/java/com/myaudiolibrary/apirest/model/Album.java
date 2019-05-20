@@ -2,6 +2,7 @@ package com.myaudiolibrary.apirest.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 
@@ -15,6 +16,8 @@ public class Album
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column (name="AlbumId")
     private Long id;
+
+    @NotNull
     @Column (name="Title")
     private String title;
 

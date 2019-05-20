@@ -18,12 +18,9 @@ public class AlbumController
 
     // Exercice 7
     @RequestMapping(value = "",method = RequestMethod.POST,consumes="application/json",produces = "application/json")
-    public Album addAlbum(@RequestBody Album album) throws DoublonException {
-        return albumService.addAlbum(album);
-
+    public Album ajout(@RequestBody Album album) throws DoublonException {
+        return albumService.ajout(album);
     }
-
-
 
     //Exercice 8
     @RequestMapping(value = "/{id}", method =RequestMethod.DELETE)

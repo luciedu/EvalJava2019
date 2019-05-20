@@ -14,9 +14,9 @@ public class AlbumService {
 
 
     //Exercice 7
-    public Album addAlbum (Album album)throws DoublonException {
+    public Album ajout (Album album)throws DoublonException {
         if (albumRepository.findByTitle(album.getTitle())!= null){
-            throw new DoublonException("le nom de l'artiste : "+album.getTitle()+" existe deja");
+            throw new DoublonException("le nom de l'album : "+album.getTitle()+" existe déjà");
         }
         return albumRepository.save(album);
     }

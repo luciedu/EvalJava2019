@@ -34,7 +34,7 @@ public class GlobalExceptionHandler
     @ResponseBody
     @ResponseStatus(HttpStatus.CONFLICT)
     public String handleEntityNotFoundException(DoublonException artistName) {
-        //return "Erreur le nom existe déjà.";
+
         return artistName.getMessage();
     }
 }

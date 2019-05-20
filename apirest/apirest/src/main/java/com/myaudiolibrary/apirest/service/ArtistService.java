@@ -31,9 +31,6 @@ public class ArtistService {
         return artistRepository.findByNameContaining(name);
     }
 
-
-
-
     //Exercice 3
     public long countArtists (){
         return artistRepository.count();

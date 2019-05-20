@@ -2,6 +2,7 @@ package com.myaudiolibrary.apirest.model;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Objects;
 
@@ -15,6 +16,8 @@ public class Artist
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="ArtistId") //récupérer les noms des colonnes de la BDD
     private Long id;
+
+    @NotNull
     @Column(name="Name") //récupérer les noms des colonnes de la BDD
     private String name;
 
